@@ -3,6 +3,8 @@ import 'package:openai_gpt3_api/openai_gpt3_api.dart';
 
 void main() {
   GPT3? api;
+  // Add your API key by adding the following command to your flutter arguments
+  // --dart-define=OPENAI_API_KEY=${OPENAI_API_KEY}
   const OPENAI_API_KEY =
       String.fromEnvironment('OPENAI_API_KEY', defaultValue: '123123123');
 

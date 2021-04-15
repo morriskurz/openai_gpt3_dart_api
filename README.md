@@ -15,3 +15,15 @@ Now in your Dart code, you can use:
 ```
 import 'package:openai_gpt3_api/openai_gpt3_api.dart';
 ```
+
+## Using the API
+To use the API, simply initialize the GPT3 object in your code
+```
+var api = GPT3(<YOUR_API_KEY>);
+```
+and then call the endpoint you want to use, e.g.
+```
+var result = await api.search(...);
+var result = await api.completion(...);
+var result = await api.classification(...);
+```
