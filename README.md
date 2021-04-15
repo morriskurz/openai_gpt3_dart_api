@@ -26,4 +26,5 @@ and then call the endpoint you want to use, e.g.
 var result = await api.search(...);
 var result = await api.completion(...);
 var result = await api.classification(...);
+var result = await api.answer(...);
 ```
