@@ -1,3 +1,3 @@
-## [0.0.1] - TODO: Add release date.
+## [0.0.1] - 15.04.2021
 
-* TODO: Describe initial release.
+* Add API calls for search, completion and classification.
