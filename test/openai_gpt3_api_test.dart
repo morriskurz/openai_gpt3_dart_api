@@ -1,6 +1,6 @@
-import 'package:flutter_test/flutter_test.dart';
 import 'package:openai_gpt3_api/invalid_request_exception.dart';
 import 'package:openai_gpt3_api/openai_gpt3_api.dart';
+import 'package:test/test.dart';
 
 void main() {
   GPT3? api;
@@ -74,7 +74,7 @@ void main() {
       expect(
           () => api!.search('How to write efficient tests?',
               file: 'Not like this', engine: Engine.babbage),
-          throwsA(isInstanceOf<InvalidRequestException>()));
+          throwsA(isA<InvalidRequestException>()));
     });
 
     test('invalid API key throws an InvalidRequestException', () async {
@@ -82,7 +82,7 @@ void main() {
       expect(
           () => api!.search('How to write efficient tests?',
               file: 'Not like this', engine: Engine.babbage),
-          throwsA(isInstanceOf<InvalidRequestException>()));
+          throwsA(isA<InvalidRequestException>()));
     });
   });
 
@@ -133,7 +133,7 @@ void main() {
       expect(
           () => api!.classification(Engine.ada, 'How to write efficient tests?',
               file: '123123'),
-          throwsA(isInstanceOf<InvalidRequestException>()));
+          throwsA(isA<InvalidRequestException>()));
     });
 
     test('invalid API key throws an InvalidRequestException', () async {
@@ -146,7 +146,7 @@ void main() {
                   ['Like this', 'Positive']
                 ],
               ),
-          throwsA(isInstanceOf<InvalidRequestException>()));
+          throwsA(isA<InvalidRequestException>()));
     });
 
     test('logprobs are correctly parsed', () async {
@@ -186,7 +186,7 @@ void main() {
       expect(
           () => api!.completion('How to write efficient tests?',
               engine: Engine.babbage),
-          throwsA(isInstanceOf<InvalidRequestException>()));
+          throwsA(isA<InvalidRequestException>()));
     });
   });
 
@@ -272,7 +272,7 @@ void main() {
               'You write efficient tests like this.',
               documents: [],
               maxTokens: 1),
-          throwsA(isInstanceOf<InvalidRequestException>()));
+          throwsA(isA<InvalidRequestException>()));
     });
   });
 
@@ -328,33 +328,32 @@ void main() {
     test(
         'invalid API key throws an InvalidRequestException when trying to delete a file',
         () async {
-      api = GPT3('123123');
+          api = GPT3('123123');
       expect(() => api!.deleteFile('test'),
-          throwsA(isInstanceOf<InvalidRequestException>()));
+          throwsA(isA<InvalidRequestException>()));
     });
 
     test(
         'invalid API key throws an InvalidRequestException when trying to upload a file',
         () async {
-      api = GPT3('123123');
+          api = GPT3('123123');
       expect(() => api!.uploadFile('test_resources/test.jsonl', 'answers'),
-          throwsA(isInstanceOf<InvalidRequestException>()));
+          throwsA(isA<InvalidRequestException>()));
     });
 
     test(
         'invalid API key throws an InvalidRequestException when trying to list your files',
         () async {
-      api = GPT3('123123');
-      expect(() => api!.listFiles(),
-          throwsA(isInstanceOf<InvalidRequestException>()));
+          api = GPT3('123123');
+      expect(() => api!.listFiles(), throwsA(isA<InvalidRequestException>()));
     });
 
     test(
         'invalid API key throws an InvalidRequestException when trying to retrieve a file',
         () async {
-      api = GPT3('123123');
+          api = GPT3('123123');
       expect(() => api!.retrieveFile('test'),
-          throwsA(isInstanceOf<InvalidRequestException>()));
+          throwsA(isA<InvalidRequestException>()));
     });
   });
 }

@@ -5,20 +5,15 @@ homepage: 'https://github.com/morriskurz/openai_gpt3_dart_api'
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
-  flutter: ">=1.17.0"
 
 dependencies:
-  flutter:
-    sdk: flutter
   http: ^0.13.1
   json_serializable: ^4.1.0
   json_annotation: ^4.0.1
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
+  test: ^1.16.0
   pedantic: ^1.11.0
   build_runner: ^1.12.2
 
-flutter:
 

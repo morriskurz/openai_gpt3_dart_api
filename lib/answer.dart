@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'answer.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(createFactory: false)
 class AnswerApiParameters {
   AnswerApiParameters(
       this.model, this.question, this.examples, this.examplesContext,

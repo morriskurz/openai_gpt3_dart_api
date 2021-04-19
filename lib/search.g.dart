@@ -6,17 +6,6 @@ part of 'search.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-SearchApiParameters _$SearchApiParametersFromJson(Map<String, dynamic> json) {
-  return SearchApiParameters(
-    json['query'] as String,
-    documents:
-        (json['documents'] as List<dynamic>?)?.map((e) => e as String).toList(),
-    file: json['file'] as String?,
-    maxRerank: json['max_rerank'] as int,
-    returnMetadata: json['return_metadata'] as bool,
-  );
-}
-
 Map<String, dynamic> _$SearchApiParametersToJson(SearchApiParameters instance) {
   final val = <String, dynamic>{
     'query': instance.query,

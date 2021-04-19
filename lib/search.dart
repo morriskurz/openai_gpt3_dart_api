@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'search.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(createFactory: false)
 class SearchApiParameters {
   SearchApiParameters(this.query,
       {this.documents,

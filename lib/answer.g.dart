@@ -6,34 +6,6 @@ part of 'answer.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-AnswerApiParameters _$AnswerApiParametersFromJson(Map<String, dynamic> json) {
-  return AnswerApiParameters(
-    json['model'] as String,
-    json['question'] as String,
-    (json['examples'] as List<dynamic>)
-        .map((e) => (e as List<dynamic>).map((e) => e as String).toList())
-        .toList(),
-    json['examples_context'] as String,
-    documents:
-        (json['documents'] as List<dynamic>?)?.map((e) => e as String).toList(),
-    file: json['file'] as String?,
-    searchModel: json['search_model'] as String,
-    maxRerank: json['max_rerank'] as int,
-    temperature: json['temperature'] as num,
-    logprobs: json['logprobs'] as int?,
-    maxTokens: json['max_tokens'] as int,
-    stop: (json['stop'] as List<dynamic>?)?.map((e) => e as String).toList(),
-    n: json['n'] as int,
-    logitBias: (json['logit_bias'] as Map<String, dynamic>?)?.map(
-      (k, e) => MapEntry(k, e as num),
-    ),
-    returnMetadata: json['return_metadata'] as bool,
-    returnPrompt: json['return_prompt'] as bool,
-    expand:
-        (json['expand'] as List<dynamic>?)?.map((e) => e as String).toList(),
-  );
-}
-
 Map<String, dynamic> _$AnswerApiParametersToJson(AnswerApiParameters instance) {
   final val = <String, dynamic>{
     'model': instance.model,

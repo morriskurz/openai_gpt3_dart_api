@@ -6,27 +6,6 @@ part of 'completion.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-CompletionApiParameters _$CompletionApiParametersFromJson(
-    Map<String, dynamic> json) {
-  return CompletionApiParameters(
-    json['prompt'] as String,
-    maxTokens: json['max_tokens'] as int,
-    temperature: json['temperature'] as num,
-    topP: json['top_p'] as num,
-    n: json['n'] as int,
-    stream: json['stream'] as bool,
-    logprobs: json['logprobs'] as int?,
-    echo: json['echo'] as bool,
-    stop: json['stop'] as String?,
-    presencePenalty: json['presence_penalty'] as num,
-    frequencyPenalty: json['frequency_penalty'] as num,
-    bestOf: json['best_of'] as int,
-    logitBias: (json['logit_bias'] as Map<String, dynamic>?)?.map(
-      (k, e) => MapEntry(k, e as num),
-    ),
-  );
-}
-
 Map<String, dynamic> _$CompletionApiParametersToJson(
     CompletionApiParameters instance) {
   final val = <String, dynamic>{

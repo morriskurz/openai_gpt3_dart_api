@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'completion.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(createFactory: false)
 class CompletionApiParameters {
   CompletionApiParameters(this.prompt,
       {this.maxTokens = 16,

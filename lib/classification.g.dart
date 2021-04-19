@@ -6,31 +6,6 @@ part of 'classification.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ClassificationApiParameters _$ClassificationApiParametersFromJson(
-    Map<String, dynamic> json) {
-  return ClassificationApiParameters(
-    json['model'] as String,
-    json['query'] as String,
-    examples: (json['examples'] as List<dynamic>?)
-        ?.map((e) => (e as List<dynamic>).map((e) => e as String).toList())
-        .toList(),
-    file: json['file'] as String?,
-    labels:
-        (json['labels'] as List<dynamic>?)?.map((e) => e as String).toList(),
-    searchModel: json['search_model'] as String,
-    temperature: json['temperature'] as num,
-    logprobs: json['logprobs'] as int?,
-    maxExamples: json['max_examples'] as int,
-    logitBias: (json['logit_bias'] as Map<String, dynamic>?)?.map(
-      (k, e) => MapEntry(k, e as num),
-    ),
-    returnPrompt: json['return_prompt'] as bool,
-    returnMetadata: json['return_metadata'] as bool,
-    expand:
-        (json['expand'] as List<dynamic>?)?.map((e) => e as String).toList(),
-  );
-}
-
 Map<String, dynamic> _$ClassificationApiParametersToJson(
     ClassificationApiParameters instance) {
   final val = <String, dynamic>{

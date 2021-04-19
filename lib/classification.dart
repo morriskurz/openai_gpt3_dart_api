@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'classification.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(createFactory: false)
 class ClassificationApiParameters {
   ClassificationApiParameters(this.model, this.query,
       {this.examples,
