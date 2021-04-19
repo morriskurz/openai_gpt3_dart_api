@@ -328,7 +328,7 @@ void main() {
     test(
         'invalid API key throws an InvalidRequestException when trying to delete a file',
         () async {
-          api = GPT3('123123');
+      api = GPT3('123123');
       expect(() => api!.deleteFile('test'),
           throwsA(isA<InvalidRequestException>()));
     });
