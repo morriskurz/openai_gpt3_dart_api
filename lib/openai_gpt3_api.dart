@@ -5,6 +5,7 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
+import 'package:openai_gpt3_api/files.dart';
 import 'package:openai_gpt3_api/search.dart';
 
 import 'answer.dart';
@@ -23,7 +24,9 @@ class GPT3 {
   GPT3(String apiKey) : apiKey = apiKey;
 
   Uri _getUri(String apiEndpoint, [Engine engine = Engine.davinci]) {
-    if (apiEndpoint == 'classifications' || apiEndpoint == 'answers') {
+    if (apiEndpoint == 'classifications' ||
+        apiEndpoint == 'answers' ||
+        apiEndpoint.startsWith('files')) {
       return Uri.https('api.openai.com', '/v1/$apiEndpoint');
     }
     return Uri.https(
@@ -205,6 +208,73 @@ class GPT3 {
     Map<String, dynamic> map = json.decode(response.body);
     _catchExceptions(map);
     return AnswerApiResult.fromJson(map);
+  }
+
+  /// Returns a list of files that belong to the user's organization.
+  ///
+  /// Throws an [InvalidRequestException] if something goes wrong on the backend.
+  ///
+  /// For more information, refer to [the OpenAI documentation](https://beta.openai.com/docs/api-reference/files/list)
+  Future<ListFilesApiResult> listFiles() async {
+    var response = await http.get(
+      _getUri('files'),
+      headers: {
+        HttpHeaders.authorizationHeader: 'Bearer $apiKey',
+      },
+    );
+    Map<String, dynamic> map = json.decode(response.body);
+    _catchExceptions(map);
+    return ListFilesApiResult.fromJson(map);
+  }
+
+  /// Upload a file that contains document(s) to be used across various endpoints/features.
+  ///
+  /// Throws an [InvalidRequestException] if something goes wrong on the backend.
+  ///
+  /// For more information, refer to [the OpenAI documentation](https://beta.openai.com/docs/api-reference/files/upload)
+  Future<UploadedFile> uploadFile(String filePath, String purpose) async {
+    var request = http.MultipartRequest('POST', _getUri('files'));
+    request.headers[HttpHeaders.authorizationHeader] = 'Bearer $apiKey';
+    request.headers['-F'] = 'purpose=\"$purpose\"';
+    request.files.add(await http.MultipartFile.fromPath('file', filePath));
+    request.files.add(http.MultipartFile.fromString('purpose', purpose));
+    var response = await request.send();
+    Map<String, dynamic> map =
+        json.decode(await response.stream.bytesToString());
+    _catchExceptions(map);
+    return UploadedFile.fromJson(map);
+  }
+
+  /// Returns information about the file with the unique [id].
+  ///
+  /// Throws an [InvalidRequestException] if something goes wrong on the backend.
+  ///
+  /// For more information, refer to [the OpenAI documentation](https://beta.openai.com/docs/api-reference/files/retrieve)
+  Future<UploadedFile> retrieveFile(String id) async {
+    var response = await http.get(
+      _getUri('files/$id'),
+      headers: {
+        HttpHeaders.authorizationHeader: 'Bearer $apiKey',
+      },
+    );
+    Map<String, dynamic> map = json.decode(response.body);
+    _catchExceptions(map);
+    return UploadedFile.fromJson(map);
+  }
+
+  /// Delete a file by its [id]. Only owners of organizations can delete files currently.
+  ///
+  /// Throws an [InvalidRequestException] if something goes wrong on the backend.
+  ///
+  /// For more information, refer to [the OpenAI documentation](https://beta.openai.com/docs/api-reference/files/delete)
+  Future<void> deleteFile(String id) async {
+    var response = await http.delete(
+      _getUri('files/$id'),
+      headers: {HttpHeaders.authorizationHeader: 'Bearer $apiKey'},
+    );
+    Map<String, dynamic> map = json.decode(response.body);
+    _catchExceptions(map);
+    return;
   }
 }
 

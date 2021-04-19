@@ -7,7 +7,7 @@ void main() {
   // Add your API key by adding the following command to your flutter arguments
   // --dart-define=OPENAI_API_KEY=${OPENAI_API_KEY}
   const OPENAI_API_KEY =
-      String.fromEnvironment('OPENAI_API_KEY', defaultValue: '123123123');
+      String.fromEnvironment('OPENAI_API_KEY', defaultValue: '');
 
   setUp(() {
     api = GPT3(OPENAI_API_KEY);
@@ -272,6 +272,88 @@ void main() {
               'You write efficient tests like this.',
               documents: [],
               maxTokens: 1),
+          throwsA(isInstanceOf<InvalidRequestException>()));
+    });
+  });
+
+  group('Files API', () {
+    test('list files returns', () async {
+      var result = await api!.listFiles();
+      print(result.data.toString());
+    });
+
+    test('upload file uploads a file', () async {
+      // Initial amount of files
+      var initialResult = await api!.listFiles();
+      var fileAmount = initialResult.data.length;
+      var result =
+          await api!.uploadFile('test_resources/test.jsonl', 'answers');
+      var endResult = await api!.listFiles();
+      expect(endResult.data.length - 1 == fileAmount, isTrue);
+
+      // Clean up, API needs a while to process file.
+      await (Future.delayed(const Duration(seconds: 10))
+          .then((value) => api!.deleteFile(result.id)));
+    });
+
+    test('deleting a file deletes the file', () async {
+      // Initial amount of files
+      var initialResult = await api!.listFiles();
+      var result =
+          await api!.uploadFile('test_resources/test.jsonl', 'answers');
+
+      // API needs a while to process file.
+      await (Future.delayed(const Duration(seconds: 10))
+          .then((value) => api!.deleteFile(result.id)));
+      var endResult = await api!.listFiles();
+      initialResult.data.sort((a, b) => a.id.compareTo(b.id));
+      endResult.data.sort((a, b) => a.id.compareTo(b.id));
+      for (var i = 0; i < initialResult.data.length; i++) {
+        expect(initialResult.data[i].id, equals(endResult.data[i].id));
+      }
+    });
+
+    test('retreiving a file works', () async {
+      // Upload a test file
+      var result =
+          await api!.uploadFile('test_resources/test.jsonl', 'answers');
+
+      var retrieve = await api!.retrieveFile(result.id);
+      expect(retrieve.id, equals(result.id));
+      // Clean up, API needs a while to process file.
+      await (Future.delayed(const Duration(seconds: 10))
+          .then((value) => api!.deleteFile(result.id)));
+    });
+
+    test(
+        'invalid API key throws an InvalidRequestException when trying to delete a file',
+        () async {
+      api = GPT3('123123');
+      expect(() => api!.deleteFile('test'),
+          throwsA(isInstanceOf<InvalidRequestException>()));
+    });
+
+    test(
+        'invalid API key throws an InvalidRequestException when trying to upload a file',
+        () async {
+      api = GPT3('123123');
+      expect(() => api!.uploadFile('test_resources/test.jsonl', 'answers'),
+          throwsA(isInstanceOf<InvalidRequestException>()));
+    });
+
+    test(
+        'invalid API key throws an InvalidRequestException when trying to list your files',
+        () async {
+      api = GPT3('123123');
+      expect(() => api!.listFiles(),
+          throwsA(isInstanceOf<InvalidRequestException>()));
+    });
+
+    test(
+        'invalid API key throws an InvalidRequestException when trying to retrieve a file',
+        () async {
+      api = GPT3('123123');
+      expect(() => api!.retrieveFile('test'),
           throwsA(isInstanceOf<InvalidRequestException>()));
     });
   });
