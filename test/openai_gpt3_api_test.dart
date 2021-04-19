@@ -336,7 +336,7 @@ void main() {
     test(
         'invalid API key throws an InvalidRequestException when trying to upload a file',
         () async {
-          api = GPT3('123123');
+      api = GPT3('123123');
       expect(() => api!.uploadFile('test_resources/test.jsonl', 'answers'),
           throwsA(isA<InvalidRequestException>()));
     });

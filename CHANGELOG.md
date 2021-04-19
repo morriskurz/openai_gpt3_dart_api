@@ -10,3 +10,8 @@
 
 * Add API calls for the API endpoint files.
 * Add further tests.
+
+## [0.1.1] - 19.04.2021
+
+* Remove unused, auto-generated methods
+* Remove flutter dependencies
