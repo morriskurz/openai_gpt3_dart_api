@@ -344,14 +344,14 @@ void main() {
     test(
         'invalid API key throws an InvalidRequestException when trying to list your files',
         () async {
-          api = GPT3('123123');
+      api = GPT3('123123');
       expect(() => api!.listFiles(), throwsA(isA<InvalidRequestException>()));
     });
 
     test(
         'invalid API key throws an InvalidRequestException when trying to retrieve a file',
         () async {
-          api = GPT3('123123');
+      api = GPT3('123123');
       expect(() => api!.retrieveFile('test'),
           throwsA(isA<InvalidRequestException>()));
     });
