@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:core';
-import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
@@ -38,9 +37,9 @@ class GPT3 {
     return http.post(
       url,
       headers: {
-        HttpHeaders.authorizationHeader: 'Bearer $apiKey',
-        HttpHeaders.acceptHeader: 'application/json',
-        HttpHeaders.contentTypeHeader: 'application/json',
+        'Authorization': 'Bearer $apiKey',
+        'Accept': 'application/json',
+        'content-type': 'application/json',
       },
       body: jsonEncode(body),
     );
@@ -219,7 +218,7 @@ class GPT3 {
     var response = await http.get(
       _getUri('files'),
       headers: {
-        HttpHeaders.authorizationHeader: 'Bearer $apiKey',
+        'Authorization': 'Bearer $apiKey',
       },
     );
     Map<String, dynamic> map = json.decode(response.body);
@@ -234,7 +233,7 @@ class GPT3 {
   /// For more information, refer to [the OpenAI documentation](https://beta.openai.com/docs/api-reference/files/upload)
   Future<UploadedFile> uploadFile(String filePath, String purpose) async {
     var request = http.MultipartRequest('POST', _getUri('files'));
-    request.headers[HttpHeaders.authorizationHeader] = 'Bearer $apiKey';
+    request.headers['Authorization'] = 'Bearer $apiKey';
     request.headers['-F'] = 'purpose=\"$purpose\"';
     request.files.add(await http.MultipartFile.fromPath('file', filePath));
     request.files.add(http.MultipartFile.fromString('purpose', purpose));
@@ -254,7 +253,7 @@ class GPT3 {
     var response = await http.get(
       _getUri('files/$id'),
       headers: {
-        HttpHeaders.authorizationHeader: 'Bearer $apiKey',
+        'Authorization': 'Bearer $apiKey',
       },
     );
     Map<String, dynamic> map = json.decode(response.body);
@@ -270,7 +269,7 @@ class GPT3 {
   Future<void> deleteFile(String id) async {
     var response = await http.delete(
       _getUri('files/$id'),
-      headers: {HttpHeaders.authorizationHeader: 'Bearer $apiKey'},
+      headers: {'Authorization': 'Bearer $apiKey'},
     );
     Map<String, dynamic> map = json.decode(response.body);
     _catchExceptions(map);

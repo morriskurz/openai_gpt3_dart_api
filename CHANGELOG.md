@@ -15,3 +15,7 @@
 
 * Remove unused, auto-generated methods
 * Remove flutter dependencies
+
+## [0.1.2] - 20.04.2021
+
+* Remove the dependency on the dart:io package by substituting the HttpHeaders by their actual values.
