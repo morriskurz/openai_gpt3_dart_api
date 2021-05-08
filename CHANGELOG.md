@@ -21,7 +21,7 @@
 * Remove the dependency on the dart:io package by substituting the HttpHeaders by their actual values.
 
 
-## [0.1.2] - 08.05.2021
+## [0.1.3] - 08.05.2021
 
 * Change the json_serializable dependency to a dev dependency.
 * Update build_runner version
