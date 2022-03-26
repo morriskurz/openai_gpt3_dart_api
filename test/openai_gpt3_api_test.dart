@@ -49,21 +49,6 @@ void main() {
       expect(result.model.startsWith('curie'), isTrue);
     });
 
-    test('curie-instruct parameter calls the curie-instruct engine', () async {
-      var result = await api!.search('How to write efficient tests?',
-          documents: ['Not like this', 'Like this'],
-          engine: Engine.curieInstruct);
-      expect(result.model.startsWith('if-curie'), isTrue);
-    });
-
-    test('davinci-instruct parameter calls the davinci-instruct engine',
-        () async {
-      var result = await api!.search('How to write efficient tests?',
-          documents: ['Not like this', 'Like this'],
-          engine: Engine.davinciInstruct);
-      expect(result.model.startsWith('if-davinci'), isTrue);
-    });
-
     test('davinci parameter calls the davinci engine', () async {
       var result = await api!.search('How to write efficient tests?',
           documents: ['Not like this', 'Like this'], engine: Engine.davinci);
