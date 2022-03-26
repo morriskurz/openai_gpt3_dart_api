@@ -34,20 +34,19 @@ Map<String, dynamic> _$ClassificationApiParametersToJson(
 }
 
 ClassificationApiResult _$ClassificationApiResultFromJson(
-    Map<String, dynamic> json) {
-  return ClassificationApiResult(
-    json['completion'],
-    json['label'] as String,
-    json['model'] as String,
-    json['object'] as String,
-    json['prompt'] as String?,
-    json['search_model'] as String,
-    (json['selected_examples'] as List<dynamic>)
-        .map((e) =>
-            ClassificationExampleData.fromJson(e as Map<String, dynamic>))
-        .toList(),
-  );
-}
+        Map<String, dynamic> json) =>
+    ClassificationApiResult(
+      json['completion'],
+      json['label'] as String,
+      json['model'] as String,
+      json['object'] as String,
+      json['prompt'] as String?,
+      json['search_model'] as String,
+      (json['selected_examples'] as List<dynamic>)
+          .map((e) =>
+              ClassificationExampleData.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
 
 Map<String, dynamic> _$ClassificationApiResultToJson(
     ClassificationApiResult instance) {
@@ -70,13 +69,12 @@ Map<String, dynamic> _$ClassificationApiResultToJson(
 }
 
 ClassificationExampleData _$ClassificationExampleDataFromJson(
-    Map<String, dynamic> json) {
-  return ClassificationExampleData(
-    json['document'] as int,
-    json['label'] as String,
-    json['text'] as String,
-  );
-}
+        Map<String, dynamic> json) =>
+    ClassificationExampleData(
+      json['document'] as int,
+      json['label'] as String,
+      json['text'] as String,
+    );
 
 Map<String, dynamic> _$ClassificationExampleDataToJson(
         ClassificationExampleData instance) =>

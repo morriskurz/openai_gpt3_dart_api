@@ -33,17 +33,16 @@ Map<String, dynamic> _$CompletionApiParametersToJson(
   return val;
 }
 
-CompletionApiResult _$CompletionApiResultFromJson(Map<String, dynamic> json) {
-  return CompletionApiResult(
-    json['id'] as String,
-    json['object'] as String,
-    json['created'] as int,
-    json['model'] as String,
-    (json['choices'] as List<dynamic>)
-        .map((e) => Choice.fromJson(e as Map<String, dynamic>))
-        .toList(),
-  );
-}
+CompletionApiResult _$CompletionApiResultFromJson(Map<String, dynamic> json) =>
+    CompletionApiResult(
+      json['id'] as String,
+      json['object'] as String,
+      json['created'] as int,
+      json['model'] as String,
+      (json['choices'] as List<dynamic>)
+          .map((e) => Choice.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
 
 Map<String, dynamic> _$CompletionApiResultToJson(
         CompletionApiResult instance) =>
@@ -55,16 +54,14 @@ Map<String, dynamic> _$CompletionApiResultToJson(
       'choices': instance.choices,
     };
 
-Choice _$ChoiceFromJson(Map<String, dynamic> json) {
-  return Choice(
-    json['text'] as String,
-    json['index'] as int,
-    json['finish_reason'] as String,
-    logprobs: json['logprobs'] == null
-        ? null
-        : Logprobs.fromJson(json['logprobs'] as Map<String, dynamic>),
-  );
-}
+Choice _$ChoiceFromJson(Map<String, dynamic> json) => Choice(
+      json['text'] as String,
+      json['index'] as int,
+      json['finish_reason'] as String,
+      logprobs: json['logprobs'] == null
+          ? null
+          : Logprobs.fromJson(json['logprobs'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$ChoiceToJson(Choice instance) => <String, dynamic>{
       'text': instance.text,
@@ -73,16 +70,14 @@ Map<String, dynamic> _$ChoiceToJson(Choice instance) => <String, dynamic>{
       'finish_reason': instance.finishReason,
     };
 
-Logprobs _$LogprobsFromJson(Map<String, dynamic> json) {
-  return Logprobs(
-    (json['text_offset'] as List<dynamic>).map((e) => e as int).toList(),
-    (json['token_logprobs'] as List<dynamic>).map((e) => e as num).toList(),
-    (json['tokens'] as List<dynamic>).map((e) => e as String).toList(),
-    (json['top_logprobs'] as List<dynamic>)
-        .map((e) => Map<String, num>.from(e as Map))
-        .toList(),
-  );
-}
+Logprobs _$LogprobsFromJson(Map<String, dynamic> json) => Logprobs(
+      (json['text_offset'] as List<dynamic>).map((e) => e as int).toList(),
+      (json['token_logprobs'] as List<dynamic>).map((e) => e as num).toList(),
+      (json['tokens'] as List<dynamic>).map((e) => e as String).toList(),
+      (json['top_logprobs'] as List<dynamic>)
+          .map((e) => Map<String, num>.from(e as Map))
+          .toList(),
+    );
 
 Map<String, dynamic> _$LogprobsToJson(Logprobs instance) => <String, dynamic>{
       'text_offset': instance.textOffset,
