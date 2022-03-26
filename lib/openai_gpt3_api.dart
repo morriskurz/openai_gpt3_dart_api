@@ -281,12 +281,11 @@ class GPT3 {
 ///
 /// For more information on the engines, refer to [the OpenAI documentation](https://beta.openai.com/docs/engines).
 class Engine {
-  static const ada = Engine._('ada');
-  static const babbage = Engine._('babbage');
-  static const curie = Engine._('curie');
-  static const curieInstruct = Engine._('curie-instruct-beta');
-  static const davinci = Engine._('davinci');
-  static const davinciInstruct = Engine._('davinci-instruct-beta');
+  static const ada = Engine._('text-ada-001');
+  static const babbage = Engine._('text-babbage-001');
+  static const curie = Engine._('text-curie-001');
+  static const davinci = Engine._('text-davinci-002');
+
   final String _string;
 
   const Engine._(this._string);
