@@ -7,11 +7,10 @@ part of 'invalid_request_exception.dart';
 // **************************************************************************
 
 InvalidRequestException _$InvalidRequestExceptionFromJson(
-    Map<String, dynamic> json) {
-  return InvalidRequestException(
-    json['message'] as String,
-  );
-}
+        Map<String, dynamic> json) =>
+    InvalidRequestException(
+      json['message'] as String,
+    );
 
 Map<String, dynamic> _$InvalidRequestExceptionToJson(
         InvalidRequestException instance) =>

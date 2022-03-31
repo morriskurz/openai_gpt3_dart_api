@@ -36,18 +36,17 @@ Map<String, dynamic> _$AnswerApiParametersToJson(AnswerApiParameters instance) {
   return val;
 }
 
-AnswerApiResult _$AnswerApiResultFromJson(Map<String, dynamic> json) {
-  return AnswerApiResult(
-    json['completion'],
-    json['model'] as String,
-    json['object'] as String,
-    json['prompt'] as String?,
-    json['search_model'] as String,
-    (json['selected_documents'] as List<dynamic>)
-        .map((e) => AnswerDocument.fromJson(e as Map<String, dynamic>))
-        .toList(),
-  );
-}
+AnswerApiResult _$AnswerApiResultFromJson(Map<String, dynamic> json) =>
+    AnswerApiResult(
+      json['completion'],
+      json['model'] as String,
+      json['object'] as String,
+      json['prompt'] as String?,
+      json['search_model'] as String,
+      (json['selected_documents'] as List<dynamic>)
+          .map((e) => AnswerDocument.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
 
 Map<String, dynamic> _$AnswerApiResultToJson(AnswerApiResult instance) {
   final val = <String, dynamic>{};
@@ -67,13 +66,12 @@ Map<String, dynamic> _$AnswerApiResultToJson(AnswerApiResult instance) {
   return val;
 }
 
-AnswerDocument _$AnswerDocumentFromJson(Map<String, dynamic> json) {
-  return AnswerDocument(
-    json['document'] as int,
-    json['metadata'] as String?,
-    json['text'] as String,
-  );
-}
+AnswerDocument _$AnswerDocumentFromJson(Map<String, dynamic> json) =>
+    AnswerDocument(
+      json['document'] as int,
+      json['metadata'] as String?,
+      json['text'] as String,
+    );
 
 Map<String, dynamic> _$AnswerDocumentToJson(AnswerDocument instance) {
   final val = <String, dynamic>{

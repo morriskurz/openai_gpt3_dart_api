@@ -24,15 +24,14 @@ Map<String, dynamic> _$SearchApiParametersToJson(SearchApiParameters instance) {
   return val;
 }
 
-SearchApiResult _$SearchApiResultFromJson(Map<String, dynamic> json) {
-  return SearchApiResult(
-    json['model'] as String,
-    json['object'] as String,
-    (json['data'] as List<dynamic>)
-        .map((e) => SearchData.fromJson(e as Map<String, dynamic>))
-        .toList(),
-  );
-}
+SearchApiResult _$SearchApiResultFromJson(Map<String, dynamic> json) =>
+    SearchApiResult(
+      json['model'] as String,
+      json['object'] as String,
+      (json['data'] as List<dynamic>)
+          .map((e) => SearchData.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
 
 Map<String, dynamic> _$SearchApiResultToJson(SearchApiResult instance) =>
     <String, dynamic>{
@@ -41,14 +40,12 @@ Map<String, dynamic> _$SearchApiResultToJson(SearchApiResult instance) =>
       'data': instance.data,
     };
 
-SearchData _$SearchDataFromJson(Map<String, dynamic> json) {
-  return SearchData(
-    json['document'] as int,
-    json['object'] as String,
-    json['score'] as num,
-    json['text'] as String?,
-  );
-}
+SearchData _$SearchDataFromJson(Map<String, dynamic> json) => SearchData(
+      json['document'] as int,
+      json['object'] as String,
+      json['score'] as num,
+      json['text'] as String?,
+    );
 
 Map<String, dynamic> _$SearchDataToJson(SearchData instance) {
   final val = <String, dynamic>{
