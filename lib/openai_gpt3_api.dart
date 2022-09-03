@@ -69,7 +69,8 @@ class GPT3 {
       num presencePenalty = 0,
       num frequencyPenalty = 0,
       int bestOf = 1,
-      Map<String, num>? logitBias}) async {
+      Map<String, num>? logitBias,
+      String? user}) async {
     var data = CompletionApiParameters(prompt,
         maxTokens: maxTokens,
         temperature: temperature,
@@ -82,7 +83,8 @@ class GPT3 {
         presencePenalty: presencePenalty,
         stop: stop,
         stream: stream,
-        topP: topP);
+        topP: topP,
+        user: user);
 
     var reqData = data.toJson();
     var response = await _postHttpCall(_getUri('completions', engine), reqData);
@@ -141,7 +143,8 @@ class GPT3 {
       Map<String, num>? logitBias,
       bool returnPrompt = false,
       bool returnMetadata = false,
-      List<String>? expand}) async {
+      List<String>? expand,
+      String? user}) async {
     var data = ClassificationApiParameters(model.toString(), query,
         returnMetadata: returnMetadata,
         file: file,
@@ -153,7 +156,8 @@ class GPT3 {
         logprobs: logprobs,
         maxExamples: maxExamples,
         returnPrompt: returnPrompt,
-        searchModel: searchModel.toString());
+        searchModel: searchModel.toString(),
+        user: user);
     var reqData = data.toJson();
     var response = await _postHttpCall(_getUri('classifications'), reqData);
     Map<String, dynamic> map = json.decode(response.body);
@@ -185,7 +189,8 @@ class GPT3 {
       Map<String, num>? logitBias,
       bool returnMetadata = false,
       bool returnPrompt = false,
-      List<String>? expand}) async {
+      List<String>? expand,
+      String? user}) async {
     var data = AnswerApiParameters(
         model.toString(), question, examples, examplesContext,
         documents: documents,
@@ -200,7 +205,8 @@ class GPT3 {
         logitBias: logitBias,
         returnPrompt: returnPrompt,
         returnMetadata: returnMetadata,
-        expand: expand);
+        expand: expand,
+        user: user);
     var reqData = data.toJson();
     var response = await _postHttpCall(_getUri('answers'), reqData);
     Map<String, dynamic> map = json.decode(response.body);
