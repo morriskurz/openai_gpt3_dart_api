@@ -30,6 +30,7 @@ Map<String, dynamic> _$ClassificationApiParametersToJson(
   val['return_prompt'] = instance.returnPrompt;
   val['return_metadata'] = instance.returnMetadata;
   writeNotNull('expand', instance.expand);
+  writeNotNull('user', instance.user);
   return val;
 }
 

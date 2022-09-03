@@ -18,7 +18,8 @@ class AnswerApiParameters {
       this.logitBias,
       this.returnMetadata = false,
       this.returnPrompt = false,
-      this.expand}) {
+      this.expand,
+      this.user}) {
     if (documents == null && file == null) {
       throw ArgumentError(
           'Either the documents argument or the file argument needs to be provided.');
@@ -46,6 +47,7 @@ class AnswerApiParameters {
   final bool returnMetadata;
   final bool returnPrompt;
   final List<String>? expand;
+  final String? user;
 
   Map<String, dynamic> toJson() => _$AnswerApiParametersToJson(this);
 }

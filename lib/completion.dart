@@ -16,7 +16,8 @@ class CompletionApiParameters {
       this.presencePenalty = 0,
       this.frequencyPenalty = 0,
       this.bestOf = 1,
-      this.logitBias});
+      this.logitBias,
+      this.user});
 
   final String prompt;
   final int maxTokens;
@@ -31,6 +32,7 @@ class CompletionApiParameters {
   final num frequencyPenalty;
   final int bestOf;
   final Map<String, num>? logitBias;
+  final String? user;
 
   Map<String, dynamic> toJson() => _$CompletionApiParametersToJson(this);
 }
