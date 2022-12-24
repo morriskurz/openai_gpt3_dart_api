@@ -5,8 +5,8 @@ part 'completion.g.dart';
 @JsonSerializable(createFactory: false)
 class CompletionApiParameters {
   CompletionApiParameters(this.prompt,
-      {this.maxTokens = 16,
-      this.temperature = 1,
+      {this.maxTokens = 256,
+      this.temperature = 0.7,
       this.topP = 1,
       this.n = 1,
       this.stream = false,
@@ -16,7 +16,8 @@ class CompletionApiParameters {
       this.presencePenalty = 0,
       this.frequencyPenalty = 0,
       this.bestOf = 1,
-      this.logitBias});
+      this.logitBias,
+      this.user});
 
   final String prompt;
   final int maxTokens;
@@ -31,6 +32,7 @@ class CompletionApiParameters {
   final num frequencyPenalty;
   final int bestOf;
   final Map<String, num>? logitBias;
+  final String? user;
 
   Map<String, dynamic> toJson() => _$CompletionApiParametersToJson(this);
 }

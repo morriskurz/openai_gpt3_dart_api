@@ -30,6 +30,7 @@ Map<String, dynamic> _$CompletionApiParametersToJson(
   val['frequency_penalty'] = instance.frequencyPenalty;
   val['best_of'] = instance.bestOf;
   writeNotNull('logit_bias', instance.logitBias);
+  writeNotNull('user', instance.user);
   return val;
 }
 

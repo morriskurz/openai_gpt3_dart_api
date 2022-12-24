@@ -15,7 +15,8 @@ class ClassificationApiParameters {
       this.logitBias,
       this.returnPrompt = false,
       this.returnMetadata = false,
-      this.expand}) {
+      this.expand,
+      this.user}) {
     if (examples == null && file == null) {
       throw ArgumentError(
           'Either the examples argument or the file argument needs to be provided.');
@@ -39,6 +40,7 @@ class ClassificationApiParameters {
   final bool returnPrompt;
   final bool returnMetadata;
   final List<String>? expand;
+  final String? user;
 
   Map<String, dynamic> toJson() => _$ClassificationApiParametersToJson(this);
 }

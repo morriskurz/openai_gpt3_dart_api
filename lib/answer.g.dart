@@ -33,6 +33,7 @@ Map<String, dynamic> _$AnswerApiParametersToJson(AnswerApiParameters instance) {
   val['return_metadata'] = instance.returnMetadata;
   val['return_prompt'] = instance.returnPrompt;
   writeNotNull('expand', instance.expand);
+  writeNotNull('user', instance.user);
   return val;
 }
 
