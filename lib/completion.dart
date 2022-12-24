@@ -5,8 +5,8 @@ part 'completion.g.dart';
 @JsonSerializable(createFactory: false)
 class CompletionApiParameters {
   CompletionApiParameters(this.prompt,
-      {this.maxTokens = 16,
-      this.temperature = 1,
+      {this.maxTokens = 256,
+      this.temperature = 0.7,
       this.topP = 1,
       this.n = 1,
       this.stream = false,

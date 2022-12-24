@@ -57,8 +57,8 @@ class GPT3 {
   ///
   /// For more information, refer to [the OpenAI documentation](https://beta.openai.com/docs/api-reference/completions/create).
   Future<CompletionApiResult> completion(String prompt,
-      {int maxTokens = 16,
-      num temperature = 1,
+      {int maxTokens = 256,
+      num temperature = 0.7,
       num topP = 1,
       int n = 1,
       bool stream = false,
@@ -289,7 +289,7 @@ class Engine {
   static const ada = Engine._('text-ada-001');
   static const babbage = Engine._('text-babbage-001');
   static const curie = Engine._('text-curie-001');
-  static const davinci = Engine._('text-davinci-002');
+  static const davinci = Engine._('text-davinci-003');
 
   final String _string;
 
