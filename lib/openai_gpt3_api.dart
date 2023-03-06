@@ -3,6 +3,7 @@ import 'dart:core';
 
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
+import 'package:openai_gpt3_api/chat.dart';
 import 'package:openai_gpt3_api/files.dart';
 import 'package:openai_gpt3_api/search.dart';
 
@@ -24,7 +25,8 @@ class GPT3 {
   Uri _getUri(String apiEndpoint, [Engine engine = Engine.davinci]) {
     if (apiEndpoint == 'classifications' ||
         apiEndpoint == 'answers' ||
-        apiEndpoint.startsWith('files')) {
+        apiEndpoint.startsWith('files') ||
+        apiEndpoint.startsWith('chat')) {
       return Uri.https('api.openai.com', '/v1/$apiEndpoint');
     }
     return Uri.https(
@@ -91,6 +93,48 @@ class GPT3 {
     Map<String, dynamic> map = json.decode(utf8.decode(response.bodyBytes));
     _catchExceptions(map);
     return CompletionApiResult.fromJson(map);
+  }
+
+  /// Post a 'completion' API request to the OpenAI service.
+  ///
+  /// Throws an [InvalidRequestException] if something goes wrong on the backend.
+  ///
+  /// For more information, refer to [the OpenAI documentation](https://beta.openai.com/docs/api-reference/completions/create).
+  Future<ChatApiResult> chat(List<ChatMessage> messages,
+      {int maxTokens = 4000,
+      num temperature = 0.7,
+      num topP = 1,
+      int n = 1,
+      bool stream = false,
+      int? logProbs,
+      bool echo = false,
+      Engine engine = Engine.gpt3_turbo,
+      String? stop,
+      num presencePenalty = 0,
+      num frequencyPenalty = 0,
+      int bestOf = 1,
+      Map<String, num>? logitBias,
+      String? user}) async {
+    var data = ChatApiParameters(messages,
+        model: Engine.gpt3_turbo._string,
+        maxTokens: maxTokens,
+        temperature: temperature,
+        frequencyPenalty: frequencyPenalty,
+        logitBias: logitBias,
+        logprobs: logProbs,
+        n: n,
+        presencePenalty: presencePenalty,
+        stop: stop,
+        stream: stream,
+        topP: topP,
+        user: user);
+
+    var reqData = data.toJson();
+    var response =
+        await _postHttpCall(_getUri('chat/completions', engine), reqData);
+    Map<String, dynamic> map = json.decode(utf8.decode(response.bodyBytes));
+    _catchExceptions(map);
+    return ChatApiResult.fromJson(map);
   }
 
   /// Given a query and a set of documents or labels, the model ranks each
@@ -290,7 +334,7 @@ class Engine {
   static const babbage = Engine._('text-babbage-001');
   static const curie = Engine._('text-curie-001');
   static const davinci = Engine._('text-davinci-003');
-
+  static const gpt3_turbo = Engine._('gpt-3.5-turbo');
   final String _string;
 
   const Engine._(this._string);

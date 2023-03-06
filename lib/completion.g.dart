@@ -43,17 +43,29 @@ CompletionApiResult _$CompletionApiResultFromJson(Map<String, dynamic> json) =>
       (json['choices'] as List<dynamic>)
           .map((e) => Choice.fromJson(e as Map<String, dynamic>))
           .toList(),
+      json['usage'] == null
+          ? null
+          : Usage.fromJson(json['usage'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$CompletionApiResultToJson(
-        CompletionApiResult instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'object': instance.object,
-      'created': instance.created,
-      'model': instance.model,
-      'choices': instance.choices,
-    };
+Map<String, dynamic> _$CompletionApiResultToJson(CompletionApiResult instance) {
+  final val = <String, dynamic>{
+    'id': instance.id,
+    'object': instance.object,
+    'created': instance.created,
+    'model': instance.model,
+    'choices': instance.choices,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('usage', instance.usage);
+  return val;
+}
 
 Choice _$ChoiceFromJson(Map<String, dynamic> json) => Choice(
       json['text'] as String,
