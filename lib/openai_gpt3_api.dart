@@ -335,6 +335,7 @@ class Engine {
   static const curie = Engine._('text-curie-001');
   static const davinci = Engine._('text-davinci-003');
   static const gpt3_turbo = Engine._('gpt-3.5-turbo');
+  static const gpt4 = Engine._('gpt-4');
   final String _string;
 
   const Engine._(this._string);
