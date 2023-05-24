@@ -289,6 +289,8 @@ class Engine {
   final String _string;
 
   const Engine._(this._string);
+  
+  static Engine custom(String name) => Engine._(name);
 
   @override
   String toString() => _string;
